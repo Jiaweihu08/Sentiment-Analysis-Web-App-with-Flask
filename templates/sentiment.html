@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+		{% if title %}
+			<title>Portfolio - {{ title }}</title>
+		{% else %}
+			<title>Portfolio - Jiawei Hu</title>
+		{% endif %}
+	</head>
+	<body>
+		<div style='height:20px'></div>
+		<div class='container'>
+			<div class="shadow-lg p-3 mb-5 bg-white rounded">
+				<h1 class='text-center'>Sentiment Analysis</h1>
+				<div class='text-center'>
+					<img src="{{ url_for('static', filename='sentiments.png') }}" class="rounded">
+				</div>
+				<div style='height:20px'></div>
+				<form method="POST", action="", enctype="multipart/form-data">
+					{{ form.hidden_tag() }}
+					<fieldset class="form-group">
+						<div class="form-group">
+							<div class="row justify-content-md-center">
+								{{ form.text.label() }}
+							</div>
+							<div class="row justify-content-md-center">
+								{{ form.text(cols=60, rows=5) }}
+							</div>
+						</div>
+					</fieldset>
+					<div class="row justify-content-md-center">
+						<div class="form-group">
+							{{ form.submit(class="btn btn-dark") }}
+						</div>
+					</div>
+				</form>
+				<div class="col-md-8">
+					<div class="row justify-content-md-center">
+						{% with messages = get_flashed_messages(with_categories=true) %}
+							{% if messages %}
+								{% for category, message in messages %}
+									<div class="alert alert-{{ category }}">
+										{{ message }}
+									</div>
+								{% endfor %}
+							{% endif %}
+						{% endwith %}
+					</div>
+				</div>
+				<div class="row justify-content-md-center">
+					{% if text %}
+						<div class="shadow-lg p-3 mb-5 bg-white rounded">
+							<div><strong>Preprocessed Text:		 {{ text }}</strong></div>
+							<img src='{{ image_source }}' class="figure-img img-fluid rounded" alt="...", width='80%'>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+	</body>
+</html>
